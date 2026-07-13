@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        :root {
+            --bg: #fdfdfd;
+            --text: #121212;
+            --text-muted: #666666;
+            --accent: #000000;
+            --surface: #f7f7f7;
+            --border: #e5e5e5;
+            --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --tracking: 0.15em;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Section Global Styles */
+        section {
+            padding: 3rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.75rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: var(--tracking);
+            margin: 2.5rem 0 1.5rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 1px;
+            background: var(--text);
+            margin: 0.75rem auto 0;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 0.9rem 2rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: var(--tracking);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid var(--text);
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background-color: var(--text);
+            color: var(--bg);
+        }
+
+        .btn-primary:hover {
+            background-color: transparent;
+            color: var(--text);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--text);
+            color: var(--bg);
+        }
+
+        /* Navigation */
+        nav {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.98);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.15rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .nav-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8rem 1rem;
+            border-radius: 999px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: var(--tracking);
+            transition: all 0.25s ease;
+            border: 1px solid transparent;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus {
+            color: var(--text);
+            background: var(--surface);
+            border-color: var(--border);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            align-items: center;
+            gap: 3.5rem; 
+            padding: 3rem 1.5rem 5rem 1.5rem;
+        }
+
+        .hero-text h3 {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            line-height: 1.1;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-tag {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: var(--tracking);
+            background: var(--text);
+            color: var(--bg);
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-desc {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin-bottom: 2.5rem;
+            max-width: 480px;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 540px;
+            background-color: var(--surface);
+            overflow: hidden;
+            border-radius: 22px;
+            border: 1px solid var(--border);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .hero-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* --- EDITORIAL WIDER SCATTER LAYOUT --- */
+        .scatter-section {
+            position: relative;
+            padding: 4rem 0 8rem 0;
+            overflow: hidden; /* Keeps mobile layout perfectly clean without horizontal scroll */
+        }
+
+        .floor-wrapper {
+            position: relative;
+            width: 100%;
+            height: 750px;
+            margin-top: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .portfolio-item {
+            position: absolute;
+            width: 290px;
+            height: 390px;
+            overflow: hidden;
+            cursor: pointer;
+            background: var(--surface);
+            padding: 12px 12px 45px 12px; /* Classic polaroid print framing border */
+            border: 1px solid var(--border);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.07);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+        }
+
+        /* Scattered offsets mapped across the layout canvas floor area */
+        .portfolio-item:nth-child(1) {
+            transform: translate(-340px, -110px) rotate(-16deg);
+            z-index: 1;
+        }
+        .portfolio-item:nth-child(2) {
+            transform: translate(-180px, 140px) rotate(12deg);
+            z-index: 3;
+        }
+        .portfolio-item:nth-child(3) {
+            transform: translate(160px, -160px) rotate(-10deg);
+            z-index: 2;
+        }
+        .portfolio-item:nth-child(4) {
+            transform: translate(340px, 90px) rotate(18deg);
+            z-index: 4;
+        }
+        .portfolio-item:nth-child(5) {
+            transform: translate(20px, -50px) rotate(-4deg);
+            z-index: 1;
+        }
+
+        /* Elevating focused element directly above layout scatter layers */
+        .portfolio-item:hover {
+            z-index: 50;
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.16);
+            transform: scale(1.06) translate(var(--tw, 0), var(--th, 0)) rotate(0deg) !important;
+        }
+
+        /* Safe dynamic transform offset translations */
+        .portfolio-item:nth-child(1):hover { --tw: -340px; --th: -110px; }
+        .portfolio-item:nth-child(2):hover { --tw: -180px; --th: 140px; }
+        .portfolio-item:nth-child(3):hover { --tw: 160px; --th: -160px; }
+        .portfolio-item:nth-child(4):hover { --tw: 340px; --th: 90px; }
+        .portfolio-item:nth-child(5):hover { --tw: 20px; --th: -50px; }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Premium Lightbox Overlay Design */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 2rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), 0 0 1px rgba(255, 255, 255, 0.2);
+            transform: scale(0.92) translateY(10px);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.2s ease;
+        }
+
+        .lightbox.active img {
+            transform: scale(1) translateY(0);
+        }
+
+        /* Modern Controls */
+        .lightbox-btn {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            transition: all 0.25s ease;
+            z-index: 2010;
+            user-select: none;
+        }
+
+        .lightbox-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: scale(1.05);
+        }
+
+        .lightbox-close {
+            top: -4rem;
+            right: 0;
+            font-size: 1.75rem;
+        }
+
+        .lightbox-nav {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .lightbox-prev { left: -5rem; }
+        .lightbox-next { right: -5rem; }
+
+        /* Bottom Call to Action Section */
+        .cta {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .cta h2 {
+            font-size: clamp(1.5rem, 4vw, 2.2rem);
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 2.5rem;
+            line-height: 1.3;
+        }
+
+        .cta .btn-secondary {
+            color: #ffffff;
+            border-color: #ffffff;
+        }
+
+        .cta .btn-secondary:hover {
+            background-color: #ffffff;
+            color: #1a1a1a;
+        }
+
+        /* Footer Layout */
+        footer {
+            padding: 2rem 0;
+            border-top: 1px solid var(--border);
+            font-size: 0.88rem;
+        }
+
+        .footer-layout {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-left h4 {
+            font-size: 1.05rem;
+            text-transform: uppercase;
+            letter-spacing: var(--tracking);
+            margin-bottom: 0.25rem;
+        }
+
+        .footer-left p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* --- RESPONSIVE MEDIA QUERIES (SCATTER PRESERVATION) --- */
+        @media (max-width: 1200px) {
+            .lightbox-close { top: 1.5rem; right: 1.5rem; }
+            .lightbox-prev { left: 1rem; }
+            .lightbox-next { right: 1rem; }
+            .lightbox-content { width: 100%; }
+        }
+
+        @media (max-width: 992px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .hero-img { height: 45vh; }
+        }
+
+        /* Tablet / iPad Interactivity Scatter Downscaling */
+        @media (max-width: 960px) {
+            .floor-wrapper {
+                height: 580px;
+            }
+            .portfolio-item {
+                width: 210px;
+                height: 280px;
+                padding: 8px 8px 32px 8px;
+            }
+            /* Proportionally scaled down transform coordinates */
+            .portfolio-item:nth-child(1) { transform: translate(-230px, -80px) rotate(-16deg); }
+            .portfolio-item:nth-child(2) { transform: translate(-120px, 110px) rotate(12deg); }
+            .portfolio-item:nth-child(3) { transform: translate(110px, -110px) rotate(-10deg); }
+            .portfolio-item:nth-child(4) { transform: translate(230px, 70px) rotate(18deg); }
+            .portfolio-item:nth-child(5) { transform: translate(15px, -30px) rotate(-4deg); }
+
+            /* Mobile-Safe Hover Map Tracking Overrides */
+            .portfolio-item:nth-child(1):hover { --tw: -230px; --th: -80px; }
+            .portfolio-item:nth-child(2):hover { --tw: -120px; --th: 110px; }
+            .portfolio-item:nth-child(3):hover { --tw: 110px; --th: -110px; }
+            .portfolio-item:nth-child(4):hover { --tw: 230px; --th: 70px; }
+            .portfolio-item:nth-child(5):hover { --tw: 15px; --th: -30px; }
+        }
+
+        /* Small Screen / Mobile Device Scatter Calibration */
+        @media (max-width: 576px) {
+            .nav-links { display: none; }
+            section { padding: 2rem 0; }
+
+            .floor-wrapper {
+                height: 420px;
+            }
+            .portfolio-item {
+                width: 145px;
+                height: 195px;
+                padding: 6px 6px 22px 6px;
+            }
+            /* Tighter coordinates tailored to fit tightly on narrow phone viewports */
+            .portfolio-item:nth-child(1) { transform: translate(-110px, -70px) rotate(-14deg); }
+            .portfolio-item:nth-child(2) { transform: translate(-65px, 80px) rotate(10deg); }
+            .portfolio-item:nth-child(3) { transform: translate(60px, -90px) rotate(-8deg); }
+            .portfolio-item:nth-child(4) { transform: translate(110px, 50px) rotate(14deg); }
+            .portfolio-item:nth-child(5) { transform: translate(0px, -15px) rotate(-3deg); }
+
+            .portfolio-item:nth-child(1):hover { --tw: -110px; --th: -70px; }
+            .portfolio-item:nth-child(2):hover { --tw: -65px; --th: 80px; }
+            .portfolio-item:nth-child(3):hover { --tw: 60px; --th: -90px; }
+            .portfolio-item:nth-child(4):hover { --tw: 110px; --th: 50px; }
+            .portfolio-item:nth-child(5):hover { --tw: 0px; --th: -15px; }
+        }
+    </style>
+</head>
+<body id="top">
+
+    <!-- Navigation Bar Row -->
+    <nav>
+        <div class="container nav-container">
+            <a href="#top" class="logo">Alex</a>
+            <div class="nav-links">
+                <a href="#portfolio">Portfolio</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Display Layout Grid -->
+    <section class="container hero">
+        <div class="hero-text">
+            <h3>Hi There!</h3>
+            <h1>I'm Alex</h1>
+            <span class="hero-tag">freelance model</span>
+            <p class="hero-desc">Follow me on <a href="https://www.facebook.com/alexis.c072306" target="_blank" rel="noopener">Facebook</a>, <a href="https://www.instagram.com/keixviiii/" target="_blank" rel="noopener">Instagram</a>, and <a href="https://www.tiktok.com/@keixviii?lang=en" target="_blank" rel="noopener">TikTok</a>.</p>
+        </div>
+        <div class="hero-img">
+            <img src="pics/s5.jfif" alt="Main Portfolio Frame">
+        </div>
+    </section>
+
+    <!-- Broad Scattered Layout Portfolio Block -->
+    <section class="container scatter-section" id="portfolio">
+        <h2 class="section-title">Portfolio</h2>
+        
+        <div class="floor-wrapper">
+            
+            <!-- Balanced Scatter Array Matrix (5 items) -->
+            <div class="portfolio-item">
+                <img src="pics/s1.jfif" alt="Portfolio image">
+            </div>
+            <div class="portfolio-item">
+                <img src="pics/s2.jfif" alt="Portfolio image">
+            </div>
+            <div class="portfolio-item">
+                <img src="pics/s3.jfif" alt="Portfolio image">
+            </div>
+            <div class="portfolio-item">
+                <img src="pics/s4.jfif" alt="Portfolio image">
+            </div>
+            <div class="portfolio-item">
+                <img src="pics/s6.jfif" alt="Portfolio image">
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Lightbox UI Overlay Wrapper -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+        <div class="lightbox-content">
+            <button class="lightbox-btn lightbox-close" aria-label="Close preview">&times;</button>
+            <button class="lightbox-btn lightbox-nav lightbox-prev" aria-label="Previous image">&#10216;</button>
+            
+            <img id="lightbox-image" src="" alt="Preview image">
+            
+            <button class="lightbox-btn lightbox-nav lightbox-next" aria-label="Next image">&#10217;</button>
+        </div>
+    </div>
+
+    <!-- Bottom Action CTA Block -->
+    <section class="cta">
+        <div class="container">
+            <h2>Have a project in mind? Let's build<br>something great together.</h2>
+            <div>
+                <a href="gallery.html" class="btn btn-secondary">View Full Collection</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Grid Layout Layout -->
+    <footer>
+        <div class="container footer-layout">
+            <div class="footer-left">
+                <h4>Alex</h4>
+                <p>Fashion & Commercial Model Portfolio<br>© 2026 Alex. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const closeButton = document.querySelector('.lightbox-close');
+        const prevButton = document.querySelector('.lightbox-prev');
+        const nextButton = document.querySelector('.lightbox-next');
+
+        const images = Array.from(document.querySelectorAll('.portfolio-item img'));
+        let currentIndex = 0;
+
+        const updateLightboxImage = (index) => {
+            if (index < 0 || index >= images.length) return;
+            currentIndex = index;
+            
+            lightboxImage.style.opacity = '0';
+            setTimeout(() => {
+                lightboxImage.src = images[currentIndex].src;
+                lightboxImage.alt = images[currentIndex].alt;
+                lightboxImage.style.opacity = '1';
+            }, 120);
+        };
+
+        images.forEach((img, index) => {
+            img.addEventListener('click', () => {
+                updateLightboxImage(index);
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        const closeLightbox = () => {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        const showNext = (e) => {
+            e.stopPropagation();
+            updateLightboxImage((currentIndex + 1) % images.length);
+        };
+
+        const showPrev = (e) => {
+            e.stopPropagation();
+            updateLightboxImage((currentIndex - 1 + images.length) % images.length);
+        };
+
+        closeButton.addEventListener('click', closeLightbox);
+        nextButton.addEventListener('click', showNext);
+        prevButton.addEventListener('click', showPrev);
+
+        lightbox.addEventListener('click', (event) => {
+            if (event.target === lightbox || event.target.classList.contains('lightbox-content')) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (!lightbox.classList.contains('active')) return;
+            
+            if (event.key === 'Escape') closeLightbox();
+            if (event.key === 'ArrowRight') updateLightboxImage((currentIndex + 1) % images.length);
+            if (event.key === 'ArrowLeft') updateLightboxImage((currentIndex - 1 + images.length) % images.length);
+        });
+    </script>
+</body>
+</html>
